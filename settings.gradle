@@ -1,0 +1,6 @@
+rootProject.name = 'microservice'
+include 'api'
+include 'shared'
+include 'services:auth'
+include 'services:bookstore'
+include 'services:reading'
