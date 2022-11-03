@@ -1,4 +1,4 @@
-package org.example.auth;
+package org.example.auth.dto;
 
 public record LoginResponse(String token) {
 }

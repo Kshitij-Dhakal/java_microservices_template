@@ -14,12 +14,12 @@ public class ReadingApplication {
     @Autowired
     private BookService bookService;
 
+    public static void main(String[] args) {
+        SpringApplication.run(ReadingApplication.class, args);
+    }
+
     @RequestMapping("/to-read")
     public Mono<String> toRead() {
         return bookService.readingList();
-    }
-
-    public static void main(String[] args) {
-        SpringApplication.run(ReadingApplication.class, args);
     }
 }

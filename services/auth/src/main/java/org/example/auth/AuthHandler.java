@@ -1,21 +1,29 @@
 package org.example.auth;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.MediaType;
+import org.example.auth.dto.LoginRequest;
 import org.springframework.stereotype.Component;
-import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
+import static org.springframework.web.reactive.function.server.ServerResponse.ok;
+
 @Slf4j
 @Component
 public class AuthHandler {
+    private AuthService authService;
+
     public Mono<ServerResponse> login(ServerRequest serverRequest) {
-        log.info("Got login request");
-//        serverRequest.bodyToMono(LoginRequest.class)
-//                .subscribe(loginRequest -> log.info("Login request : {}", loginRequest));
-        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
-                .body(BodyInserters.fromValue(new LoginResponse("token")));
+        return serverRequest.bodyToMono(LoginRequest.class)
+                .flatMap(lr -> authService.login(lr))
+                .flatMap(lr -> ok().bodyValue(lr));
+    }
+
+    public Mono<ServerResponse> fetchUserProfile(ServerRequest serverRequest) {
+        return Mono.just(serverRequest.headers()
+                        .firstHeader("Authorization"))
+                .flatMap(token -> authService.fetchUserProfile(token))
+                .flatMap(userProfile -> ok().bodyValue(userProfile));
     }
 }
