@@ -4,3 +4,6 @@ include 'shared'
 include 'services:auth'
 include 'services:bookstore'
 include 'services:reading'
+include 'services:discovery-server'
+findProject(':services:discovery-server')?.name = 'discovery-server'
+

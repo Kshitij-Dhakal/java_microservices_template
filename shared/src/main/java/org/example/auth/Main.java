@@ -1,4 +1,4 @@
-package np.com.kshitij.template;
+package org.example.auth;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
