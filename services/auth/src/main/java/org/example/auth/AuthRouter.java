@@ -5,17 +5,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
-import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
 import static org.springframework.web.reactive.function.server.RequestPredicates.POST;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
-@Configuration(proxyBeanMethods = false)
+@Configuration
 public class AuthRouter {
-
     @Bean
-    public RouterFunction<ServerResponse> routes(AuthHandler authHandler) {
-        return route(POST("v1/auth/login"), authHandler::login)
-                .andRoute(GET("/v1/auth/login"), authHandler::fetchUserProfile);
+    public RouterFunction<ServerResponse> routers(AuthHandler authHandler) {
+        return route(POST("/v1/auth/login"), authHandler::login);
     }
-
 }

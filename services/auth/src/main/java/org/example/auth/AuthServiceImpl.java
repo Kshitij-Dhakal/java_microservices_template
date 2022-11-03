@@ -4,11 +4,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.auth.dto.LoginRequest;
 import org.example.auth.dto.LoginResponse;
 import org.example.auth.model.UserProfile;
+import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 import java.time.Instant;
 
 @Slf4j
+@Service
 public class AuthServiceImpl implements AuthService {
     @Override
     public Mono<LoginResponse> login(LoginRequest lr) {
