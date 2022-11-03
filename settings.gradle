@@ -6,4 +6,6 @@ include 'services:bookstore'
 include 'services:reading'
 include 'services:discovery-server'
 findProject(':services:discovery-server')?.name = 'discovery-server'
+include 'services:discovery-server'
+findProject(':services:discovery-server')?.name = 'discovery-server'
 
